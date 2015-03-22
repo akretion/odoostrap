@@ -1,17 +1,16 @@
-FROM ubuntu:trusty
+FROM ubuntu-debootstrap:14.04
 MAINTAINER rvalyi "rvalyi@akretion.com"
 
 RUN DEBIAN_FRONTEND=noninteractive && \
     apt-get update && \
     apt-get install -y git && \
-    apt-get clean
-
-RUN DEBIAN_FRONTEND=noninteractive && \
+    apt-get clean && \
     mkdir -p /opt/odoostrap/parts
 
 #sha1
-#7be175bad69926ea6beb589ead49809fa07a9427
-RUN cd /opt/odoostrap/parts && git clone https://github.com/odoo/odoo.git -b 8.0 --depth=50
+#77a75d4e1f34832650c03f2cc46a8cd82d940478
+RUN cd /opt/odoostrap/parts && \
+    git clone https://github.com/odoo/odoo.git -b 8.0 --depth=50
 
 # seems this won't free any space sadly
 RUN DEBIAN_FRONTEND=noninteractive && \
